@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,13 @@ import com.fb.tangyc.fbtools.R;
 /**
  * Created by tangyc on 2016/1/4.
  */
-public class FBService extends Service {
+public class FBService extends Service implements View.OnClickListener, View.OnLongClickListener {
     private WindowManager wm;
     private ViewGroup mLlService;
     private  WindowManager.LayoutParams params ;
     @Override
     public void onCreate() {
-
+//http://ico.58pic.com/
         super.onCreate();
 
         wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
@@ -39,6 +40,8 @@ public class FBService extends Service {
         // 不设置这个弹出框的透明遮罩显示为黑色
         params.format = PixelFormat.TRANSLUCENT;
         mLlService = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.lay_service, null);
+        mLlService.setOnClickListener(this);
+        mLlService.setOnLongClickListener(this);
         mLlService.setVisibility(View.GONE);
         wm.addView(mLlService, params);
     }
@@ -68,5 +71,14 @@ public class FBService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
     }
 }

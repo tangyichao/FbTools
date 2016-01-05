@@ -33,6 +33,23 @@
             android:layout_weight="1"
             android:gravity="center_vertical" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_theme"
+        android:layout_below="@id/ll_fb"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="悬浮窗主题"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>
