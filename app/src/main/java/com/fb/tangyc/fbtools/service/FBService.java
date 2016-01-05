@@ -20,14 +20,14 @@ import com.fb.tangyc.fbtools.R;
 public class FBService extends Service {
     private WindowManager wm;
     private ViewGroup mLlService;
-
+    private  WindowManager.LayoutParams params ;
     @Override
     public void onCreate() {
 
         super.onCreate();
 
         wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params = new WindowManager.LayoutParams();
         params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -43,10 +43,15 @@ public class FBService extends Service {
         wm.addView(mLlService, params);
     }
 
+
     @Override
 
     public int onStartCommand(Intent intent, int flags, int startId) {
+        boolean isShowFB=intent.getBooleanExtra("isShowFB",false);
+        mLlService.setVisibility(isShowFB?View.VISIBLE:View.GONE);
+        wm.updateViewLayout(mLlService,params);
         return super.onStartCommand(intent, flags, startId);
+
     }
 
     @Nullable

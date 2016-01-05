@@ -26,18 +26,18 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startService(new Intent(MainActivity.this, FBService.class));
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        SwitchCompat mScFb= (SwitchCompat) findViewById(R.id.sc_fb);
+        SwitchCompat mScFb = (SwitchCompat) findViewById(R.id.sc_fb);
         mScFb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+                Intent intent = new Intent(MainActivity.this, FBService.class);
 
-                }
+                intent.putExtra("isShowFB", isChecked);
+                startService(intent);
             }
         });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
             //分享功能
-            AndroidUtils.shareMsg(this,"分享","分享","那就去下载吧",null);
+            AndroidUtils.shareMsg(this, "分享", "分享", "那就去下载吧", null);
         } else if (id == R.id.nav_send) {
 
         }

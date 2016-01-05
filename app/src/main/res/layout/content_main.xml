@@ -34,24 +34,5 @@
             android:gravity="center_vertical" />
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="50"
-        style="@style/AppTheme.SeekBar"
-        android:layout_below="@id/ll_fb"
-        android:id="@+id/seekBar" />
-    <android.support.v4.widget.ContentLoadingProgressBar
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content"/>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
