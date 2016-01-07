@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
+import com.fb.tangyc.fbtools.activity.ThemeActivity;
 import com.fb.tangyc.fbtools.service.FBService;
 import com.fb.tangyc.fbtools.utils.AndroidUtils;
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        LinearLayout mLLTheme= (LinearLayout) findViewById(R.id.ll_theme);
+        LinearLayout mLLTheme = (LinearLayout) findViewById(R.id.ll_theme);
         mLLTheme.setOnClickListener(this);
     }
 
@@ -123,10 +124,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.ll_theme:
-
+                Intent intent = new Intent();
+                intent.setClass(this, ThemeActivity.class);
+                startActivity(intent);
                 break;
         }
     }
