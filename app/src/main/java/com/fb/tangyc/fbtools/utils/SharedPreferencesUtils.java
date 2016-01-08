@@ -10,6 +10,8 @@ public class SharedPreferencesUtils {
 	private static SharedPreferencesUtils utils = null;
 	private static final String CONFIG = "config";
 	private static final String FLOATING_WINDOW = "floating_window";
+	private static final String FLOATING_RES = "floating_res";
+
 	private static final String PARAMS_X = "params_x";
 	private static final String PARAMS_Y = "params_y";	
 	private SharedPreferencesUtils() {
@@ -24,6 +26,14 @@ public class SharedPreferencesUtils {
 			}
 		}
 		return utils;
+	}
+	public void setFloatingRes(Context context, int res) {
+
+		context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).edit().putInt(FLOATING_RES,res).commit();
+	}
+
+	public int getFloatingRes(Context context) {
+		return context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).getInt(FLOATING_RES,0);
 	}
 
 	public void setFloatingWindow(Context context, boolean isThere) { 
@@ -43,8 +53,7 @@ public class SharedPreferencesUtils {
 	public int getParamsX(Context context) {       
 		DisplayMetrics dm = new DisplayMetrics();  
 		dm = context.getResources().getDisplayMetrics();       
-		Log.i("test",""+dm.widthPixels+"XXXX"+dm.heightPixels);
-		
+
 		return context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).getInt(PARAMS_X,dm.widthPixels);
 	}
 	public void setParamsY(Context context, int y) { 

@@ -65,6 +65,12 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean isShowFB = intent.getBooleanExtra("isShowFB", false);
+
+        int res=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingRes(this);
+        if(res!=0)
+        {
+            windowView.findViewById(R.id.iv_icon).setBackgroundResource(res);
+        }
         windowView .setVisibility(isShowFB ? View.VISIBLE : View.GONE);
         wManager.updateViewLayout( windowView, mParams);
         return super.onStartCommand(intent, flags, startId);
