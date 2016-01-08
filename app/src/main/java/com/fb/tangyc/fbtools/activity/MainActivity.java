@@ -1,4 +1,4 @@
-package com.fb.tangyc.fbtools;
+package com.fb.tangyc.fbtools.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,19 +17,18 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import com.fb.tangyc.fbtools.activity.ThemeActivity;
+import com.fb.tangyc.fbtools.BaseActivity;
+import com.fb.tangyc.fbtools.R;
 import com.fb.tangyc.fbtools.service.FBService;
 import com.fb.tangyc.fbtools.utils.AndroidUtils;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SwitchCompat mScFb = (SwitchCompat) findViewById(R.id.sc_fb);
@@ -62,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         LinearLayout mLLTheme = (LinearLayout) findViewById(R.id.ll_theme);
         mLLTheme.setOnClickListener(this);
+        LinearLayout mLLSetting = (LinearLayout) findViewById(R.id.ll_setting);
+        mLLSetting.setOnClickListener(this);
     }
 
     @Override
@@ -125,11 +126,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_theme:
+            case R.id.ll_theme: {
                 Intent intent = new Intent();
                 intent.setClass(this, ThemeActivity.class);
                 startActivity(intent);
-                break;
+            }
+            break;
+            case R.id.ll_setting: {
+                Intent intent = new Intent();
+                intent.setClass(this, FbSettingActivity.class);
+                startActivity(intent);
+            }
+            break;
         }
     }
 }

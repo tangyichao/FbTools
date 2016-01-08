@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.fb.tangyc.fbtools.BaseActivity;
 import com.fb.tangyc.fbtools.R;
 import com.fb.tangyc.fbtools.adapter.ThemeAdapter;
 
 /**
  * Created by tangyc on 2016/1/5.
  */
-public class ThemeActivity extends AppCompatActivity {
+public class ThemeActivity extends BaseActivity {
     private RecyclerView mRvTheme;
     private int[] items = {R.mipmap.ooopic_1, R.mipmap.ooopic_2, R.mipmap.ooopic_3, R.mipmap.ooopic_4, R.mipmap.ooopic_5, R.mipmap.ooopic_6, R.mipmap.ooopic_7, R.mipmap.ooopic_8, R.mipmap.ooopic_9, R.mipmap.ooopic_10, R.mipmap.ooopic_11, R.mipmap.ooopic_1, R.mipmap.ooopic_13, R.mipmap.ooopic_14, R.mipmap.ooopic_15, R.mipmap.ooopic_16, R.mipmap.ooopic_17, R.mipmap.ooopic_18, R.mipmap.ooopic_19, R.mipmap.ooopic_20};
 
@@ -33,6 +34,7 @@ public class ThemeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         initUi();
         initData();
+
     }
 
     private void initUi() {
