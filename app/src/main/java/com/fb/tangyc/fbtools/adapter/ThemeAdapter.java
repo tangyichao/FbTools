@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.fb.tangyc.fbtools.R;
 import com.fb.tangyc.fbtools.service.FBService;
@@ -19,9 +20,11 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.MyViewHolder
 
     private Context context;
     private int[] items;
-    public ThemeAdapter(Context context, int[] items) {
+    private String[] strs;
+    public ThemeAdapter(Context context, int[] items, String[] strs) {
         this.context = context;
         this.items = items;
+        this.strs=strs;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.mIvTheme.setImageResource(items[position]);
+        holder.mTvName.setText(strs[position]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +57,12 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.MyViewHolder
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView mIvTheme;
-
+        TextView mTvName;
         public MyViewHolder(View itemView) {
 
             super(itemView);
             mIvTheme = (ImageView) itemView.findViewById(R.id.iv_theme);
+            mTvName= (TextView) itemView.findViewById(R.id.tv_name);
         }
     }
 }

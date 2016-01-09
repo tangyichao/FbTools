@@ -49,6 +49,7 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_setting"
         android:layout_below="@id/ll_theme"
@@ -65,7 +66,22 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_tools_setting"
+        android:layout_below="@id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="六个点"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

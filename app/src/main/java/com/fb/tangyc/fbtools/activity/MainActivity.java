@@ -63,6 +63,8 @@ public class MainActivity extends BaseActivity
         mLLTheme.setOnClickListener(this);
         LinearLayout mLLSetting = (LinearLayout) findViewById(R.id.ll_setting);
         mLLSetting.setOnClickListener(this);
+        LinearLayout mLLToolsSetting = (LinearLayout) findViewById(R.id.ll_tools_setting);
+        mLLToolsSetting.setOnClickListener(this);
     }
 
     @Override
@@ -137,7 +139,13 @@ public class MainActivity extends BaseActivity
                 intent.setClass(this, FbSettingActivity.class);
                 startActivity(intent);
             }
+            break; case R.id.ll_tools_setting: {
+                Intent intent = new Intent();
+                intent.setClass(this, FbToolsActivity.class);
+                startActivity(intent);
+            }
             break;
+
         }
     }
 }

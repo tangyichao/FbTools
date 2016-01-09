@@ -1,12 +1,15 @@
 package com.fb.tangyc.fbtools.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -14,6 +17,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.fb.tangyc.fbtools.R;
 import com.fb.tangyc.fbtools.utils.SharedPreferencesUtils;
@@ -29,6 +33,8 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     private FloatButtonLayout windowView;
     private SurfaceHolder holder;
+    public static final String ACTION_ALPHA = "com.fb.alpha";
+    private ServiceReceiver receiver;
 
     @Override
     public void onCreate() {
@@ -57,7 +63,18 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
         this.holder.addCallback(this);
         windowView.setVisibility(View.VISIBLE);
         windowView.findViewById(R.id.iv_icon).setBackgroundResource(R.mipmap.ooopic_1);
+        int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(this);
+        windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
         wManager.addView(windowView, mParams);// 添加窗口
+        initData();
+    }
+
+    private void initData() {
+        receiver = new ServiceReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_ALPHA);
+        filter.setPriority(2147483647);
+        registerReceiver(receiver, filter);
     }
 
 
@@ -66,15 +83,31 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean isShowFB = intent.getBooleanExtra("isShowFB", false);
 
-        int res=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingRes(this);
-        if(res!=0)
-        {
+        int res = SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingRes(this);
+        if (res != 0) {
             windowView.findViewById(R.id.iv_icon).setBackgroundResource(res);
         }
-        windowView .setVisibility(isShowFB ? View.VISIBLE : View.GONE);
-        wManager.updateViewLayout( windowView, mParams);
+        windowView.setVisibility(isShowFB ? View.VISIBLE : View.GONE);
+        wManager.updateViewLayout(windowView, mParams);
         return super.onStartCommand(intent, flags, startId);
 
+    }
+
+
+    class ServiceReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (!TextUtils.isEmpty(action)) {
+                if (action.equals(ACTION_ALPHA)) {
+                    int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(context);
+                    windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
+                    windowView.invalidate();
+                }
+            }
+
+        }
     }
 
     @Nullable
@@ -90,6 +123,9 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     @Override
     public void onDestroy() {
+        if (receiver != null) {
+            unregisterReceiver(receiver);
+        }
         super.onDestroy();
     }
 

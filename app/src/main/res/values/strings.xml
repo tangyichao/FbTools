@@ -5,4 +5,29 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <array name="theme_name">
+
+        <item >超级玛丽</item>
+        <item >法拉利</item>
+        <item >兰博基尼</item>
+        <item >中国</item>
+        <item >垃圾桶</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+        <item >超级玛丽</item>
+
+    </array>
 </resources>
