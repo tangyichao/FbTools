@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -19,7 +20,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.fb.tangyc.fbtools.Contants;
 import com.fb.tangyc.fbtools.R;
+import com.fb.tangyc.fbtools.utils.FlashLightUtils;
 import com.fb.tangyc.fbtools.utils.SharedPreferencesUtils;
 import com.fb.tangyc.fbtools.view.FloatButtonLayout;
 
@@ -66,6 +69,7 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
         int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(this);
         windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
         wManager.addView(windowView, mParams);// 添加窗口
+        windowView.setOnClickListener(this);
         initData();
     }
 
@@ -131,6 +135,25 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     @Override
     public void onClick(View v) {
+        String toolType=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingToolName(this);
+        Log.i("TAG",toolType);
+        switch (v.getId())
+        {
+            case R.id.fb_window:
+                //手电
+
+                if(Contants.SPLASHLIGHT.equals(toolType))
+                {
+                    try {
+                        FlashLightUtils.openFlash(this);
+                    } catch (Exception e) {
+                        e.printStackTrace();   Log.i("TAG",e.getMessage());
+
+                    }
+                }
+                break;
+
+        }
     }
 
     @Override

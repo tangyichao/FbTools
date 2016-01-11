@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.fb.tangyc.fbtools.view.FloatButtonLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
+    android:id="@+id/fb_window"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     android:padding="1dp">
 
     <ImageView

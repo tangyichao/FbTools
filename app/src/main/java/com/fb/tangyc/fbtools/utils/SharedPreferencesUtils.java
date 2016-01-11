@@ -12,6 +12,7 @@ public class SharedPreferencesUtils {
     private static final String FLOATING_WINDOW = "floating_window";
     private static final String FLOATING_RES = "floating_res";
     private static final String FLOATING_AlPHA = "floating_alpha";
+    private static final String FLOATING_TOOL_NAME ="floating_tool_name" ;
     private static final String PARAMS_X = "params_x";
     private static final String PARAMS_Y = "params_y";
 
@@ -48,6 +49,16 @@ public class SharedPreferencesUtils {
     public int getFloatingAlpha(Context context) {
         return context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).getInt(FLOATING_AlPHA, 0);
     }
+
+    public void setFloatingToolName(Context context, String name) {
+
+        context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).edit().putString(FLOATING_TOOL_NAME, name).commit();
+    }
+
+    public String getFloatingToolName(Context context) {
+        return context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).getString(FLOATING_TOOL_NAME,"");
+    }
+
 
 
     public void setFloatingWindow(Context context, boolean isThere) {
