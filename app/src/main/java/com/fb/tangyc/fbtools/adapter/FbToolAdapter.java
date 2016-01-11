@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fb.tangyc.fbtools.R;
@@ -40,7 +41,7 @@ public class FbToolAdapter extends RecyclerView.Adapter<FbToolAdapter.MyViewHold
         }else{
             holder.itemView.setBackgroundColor(Color.YELLOW);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mLlName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtils.getSharedPreferencesUtils().setFloatingToolName(context, holder.mTvName.getText().toString().trim());
@@ -56,11 +57,12 @@ public class FbToolAdapter extends RecyclerView.Adapter<FbToolAdapter.MyViewHold
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView mTvName;
-
+        LinearLayout mLlName;
         public MyViewHolder(View itemView) {
 
             super(itemView);
             mTvName = (TextView) itemView.findViewById(R.id.tv_name);
+            mLlName= (LinearLayout) itemView.findViewById(R.id.ll_tool_name);
         }
     }
 }

@@ -8,20 +8,17 @@ import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.fb.tangyc.fbtools.Contants;
 import com.fb.tangyc.fbtools.R;
+import com.fb.tangyc.fbtools.activity.ScreenActivity;
 import com.fb.tangyc.fbtools.utils.FlashLightUtils;
 import com.fb.tangyc.fbtools.utils.SharedPreferencesUtils;
 import com.fb.tangyc.fbtools.view.FloatButtonLayout;
@@ -66,10 +63,10 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
         this.holder.addCallback(this);
         windowView.setVisibility(View.VISIBLE);
         windowView.findViewById(R.id.iv_icon).setBackgroundResource(R.mipmap.ooopic_1);
-        int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(this);
+        int alpha = SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(this);
         windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
         wManager.addView(windowView, mParams);// 添加窗口
-        windowView.setOnClickListener(this);
+        windowView.findViewById(R.id.iv_icon).setOnClickListener(this);
         initData();
     }
 
@@ -105,7 +102,7 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
             String action = intent.getAction();
             if (!TextUtils.isEmpty(action)) {
                 if (action.equals(ACTION_ALPHA)) {
-                    int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(context);
+                    int alpha = SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(context);
                     windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
                     windowView.invalidate();
                 }
@@ -135,21 +132,38 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     @Override
     public void onClick(View v) {
-        String toolType=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingToolName(this);
-        Log.i("TAG",toolType);
-        switch (v.getId())
-        {
-            case R.id.fb_window:
+        String toolType = SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingToolName(this);
+        switch (v.getId()) {
+            case R.id.iv_icon:
                 //手电
 
-                if(Contants.SPLASHLIGHT.equals(toolType))
-                {
-                    try {
-                        FlashLightUtils.openFlash(this);
-                    } catch (Exception e) {
-                        e.printStackTrace();   Log.i("TAG",e.getMessage());
+                if (Contants.Splashlight.splashlight.equals(toolType)) {
+                    if (Contants.Splashlight.type == false) {
+                        try {
+                            FlashLightUtils.openFlash(this);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Contants.Splashlight.type = true;
+                    } else {
 
+                        try {
+                            FlashLightUtils.closeFlash();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Contants.Splashlight.type = false;
                     }
+                }else if(Contants.Screenlight.screenlight.equals(toolType)){
+                    if(Contants.Screenlight.type == false)
+                    {
+                        Intent intent =new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setClass(this, ScreenActivity.class);
+                        startActivity(intent);
+                        Contants.Screenlight.type=true;
+                    }
+
                 }
                 break;
 

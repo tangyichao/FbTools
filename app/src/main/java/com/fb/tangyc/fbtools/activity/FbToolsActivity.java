@@ -39,7 +39,7 @@ public class FbToolsActivity extends BaseActivity {
     private void initData() {
         String[] itemNames=getResources().getStringArray(R.array.tool_name);
 
-        mRvTools.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayout.VERTICAL));
+        mRvTools.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayout.VERTICAL));
         //设置Item增加、移除动画
         mRvTools.setItemAnimator(new DefaultItemAnimator());
         //添加分割线
