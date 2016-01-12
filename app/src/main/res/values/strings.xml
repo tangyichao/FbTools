@@ -16,23 +16,12 @@
         <item >Opera</item>
         <item >超级玛丽</item>
         <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
-        <item >超级玛丽</item>
+
 
     </array>
     <array name="tool_name">
-        <item >手电</item>
-        <item >截屏</item>
+        <item >简单手电</item>
+        <item >屏幕灯</item>
         <item >锁屏</item>
         <item >清理内存</item>
     </array>

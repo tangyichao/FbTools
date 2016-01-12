@@ -3,19 +3,17 @@ package com.fb.tangyc.fbtools.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.SwitchCompat;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.fb.tangyc.fbtools.BaseActivity;
 import com.fb.tangyc.fbtools.R;
@@ -45,8 +43,9 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, FbToolsActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -65,6 +64,7 @@ public class MainActivity extends BaseActivity
         mLLSetting.setOnClickListener(this);
         LinearLayout mLLToolsSetting = (LinearLayout) findViewById(R.id.ll_tools_setting);
         mLLToolsSetting.setOnClickListener(this);
+      //  ((TextView)navigationView.getHeaderView(1)).setText(getResources().getString(R.string.app_name));
     }
 
     @Override
@@ -77,27 +77,8 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -109,10 +90,6 @@ public class MainActivity extends BaseActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
             //分享功能
             AndroidUtils.shareMsg(this, "分享", "分享", "那就去下载吧", null);
@@ -123,6 +100,11 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        return super.onNavigateUp();
     }
 
     @Override
@@ -139,7 +121,8 @@ public class MainActivity extends BaseActivity
                 intent.setClass(this, FbSettingActivity.class);
                 startActivity(intent);
             }
-            break; case R.id.ll_tools_setting: {
+            break;
+            case R.id.ll_tools_setting: {
                 Intent intent = new Intent();
                 intent.setClass(this, FbToolsActivity.class);
                 startActivity(intent);
