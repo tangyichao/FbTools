@@ -69,7 +69,7 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
         int alpha=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingAlpha(this);
         windowView.findViewById(R.id.iv_icon).getBackground().setAlpha(alpha);
         wManager.addView(windowView, mParams);// 添加窗口
-        windowView.setOnClickListener(this);
+        windowView.findViewById(R.id.iv_icon).setOnClickListener(this);
         initData();
     }
 
@@ -135,20 +135,19 @@ public class FBService extends Service implements View.OnClickListener, View.OnL
 
     @Override
     public void onClick(View v) {
+        Log.i("TAG","XXXXXXXXXXX");
         String toolType=SharedPreferencesUtils.getSharedPreferencesUtils().getFloatingToolName(this);
         Log.i("TAG",toolType);
         switch (v.getId())
         {
-            case R.id.fb_window:
+            case R.id.iv_icon:
                 //手电
-
                 if(Contants.SPLASHLIGHT.equals(toolType))
                 {
                     try {
                         FlashLightUtils.openFlash(this);
                     } catch (Exception e) {
-                        e.printStackTrace();   Log.i("TAG",e.getMessage());
-
+                        e.printStackTrace();
                     }
                 }
                 break;
